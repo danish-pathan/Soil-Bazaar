@@ -4,18 +4,17 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
 import List from "./components/List";
+import HomePage from "./pages/Home";
 
 function App() {
   return (
     <div>
       <Navbar />
       <Routes>
-        <Route path="/" element={<h1>Home</h1>}></Route>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="/register" element={<Register />}></Route>
-        <Route path="/soil/list" element={<List />}>
-          /
-        </Route>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/soil/list" element={<List />} />
       </Routes>
     </div>
   );

@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -10,8 +9,8 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 
-import { getFirestore, collection, addDoc } from "firebase/firestore";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const FirebaseContext = createContext(null);
 
@@ -29,7 +28,6 @@ export const useFirebase = () => useContext(FirebaseContext);
 
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(app);
 const firebaseAuth = getAuth(firebaseApp);
 const firestore = getFirestore(firebaseApp);
 const storage = getStorage(firebaseApp);
@@ -54,7 +52,9 @@ export const FirebaseProvider = (props) => {
 
   const signinWithGoogle = () => signInWithPopup(firebaseAuth, googleProvider);
 
-  console.log(user);
+  const signOut = () => {
+    return firebaseAuth.signOut();
+  };
 
   const handleCreateNewListing = async (
     name,
@@ -80,6 +80,14 @@ export const FirebaseProvider = (props) => {
     });
   };
 
+  const listAllProducts = () => {
+    return getDocs(collection(firestore, "products"));
+  };
+
+  const getImageURL = (path) => {
+    return getDownloadURL(ref(storage, path));
+  };
+
   const isLoggedIn = user ? true : false;
 
   return (
@@ -89,7 +97,10 @@ export const FirebaseProvider = (props) => {
         signupUserWithEmailAndPassword,
         signinUserWithEmailAndPass,
         handleCreateNewListing,
+        listAllProducts,
+        getImageURL,
         isLoggedIn,
+        signOut,
       }}
     >
       {props.children}

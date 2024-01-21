@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFirebase } from "../context/Firebase";
+import { useNavigate } from "react-router-dom";
 
 export default function List() {
   const firebase = useFirebase();
@@ -10,6 +11,14 @@ export default function List() {
   const [contact, setContact] = useState("");
   const [price, setPrice] = useState("");
   const [coverPic, setCoverPic] = useState("");
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!firebase.isLoggedIn) {
+      navigate("/login");
+    }
+  }, [firebase, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

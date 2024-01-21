@@ -2,9 +2,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 
 import { useFirebase } from "../context/Firebase";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const firebase = useFirebase();
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,6 +14,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await firebase.signupUserWithEmailAndPassword(email, password);
+    navigate("/");
   };
 
   return (
