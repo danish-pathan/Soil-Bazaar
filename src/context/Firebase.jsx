@@ -9,7 +9,14 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 
-import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  getDoc,
+  doc,
+} from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const FirebaseContext = createContext(null);
@@ -59,7 +66,7 @@ export const FirebaseProvider = (props) => {
   const handleCreateNewListing = async (
     name,
     description,
-    distributer,
+    distributor,
     contact,
     price,
     cover
@@ -69,7 +76,7 @@ export const FirebaseProvider = (props) => {
     return await addDoc(collection(firestore, "products"), {
       name,
       description,
-      distributer,
+      distributor,
       contact,
       price,
       imageURL: uploadResult.ref.fullPath,
@@ -82,6 +89,12 @@ export const FirebaseProvider = (props) => {
 
   const listAllProducts = () => {
     return getDocs(collection(firestore, "products"));
+  };
+
+  const getProductById = async (id) => {
+    const docRef = doc(firestore, "products", id);
+    const result = await getDoc(docRef);
+    return result;
   };
 
   const getImageURL = (path) => {
@@ -99,6 +112,7 @@ export const FirebaseProvider = (props) => {
         handleCreateNewListing,
         listAllProducts,
         getImageURL,
+        getProductById,
         isLoggedIn,
         signOut,
       }}

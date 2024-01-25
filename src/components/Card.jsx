@@ -24,12 +24,12 @@ const ProductCard = (props) => {
           {props.name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          This product is sold by {props.displayName} and costs Rs.{" "}
+          This product is sold by {props.distributor} and costs Rs.{" "}
           {props.price}
         </Typography>
       </CardContent>
       <Button
-        onClick={() => navigate(props.link)}
+        onClick={(e) => navigate(`/product/view/${props.id}`)}
         variant="contained"
         color="primary"
       >

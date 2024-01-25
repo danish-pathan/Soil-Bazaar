@@ -34,7 +34,7 @@ export default function List() {
 
   return (
     <div className="form-container">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="form-list">
         <div className="mb-3">
           <label className="form-label">Product Name</label>
           <input

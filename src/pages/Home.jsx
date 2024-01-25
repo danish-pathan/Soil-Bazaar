@@ -19,7 +19,7 @@ const HomePage = () => {
   }, [firebase, navigate]);
 
   return (
-    <Container className="card-container" maxWidth="lg">
+    <Container className="card-container">
       <Grid
         container
         spacing={{ xs: 2, md: 3 }}
@@ -27,7 +27,12 @@ const HomePage = () => {
       >
         {products.map((product) => (
           <Grid item xs={2} sm={4} md={4}>
-            <Card key={product.id} {...product.data()} />
+            <Card
+              key={product.id}
+              // link={`/product/view/${product.id}`}
+              id={product.id}
+              {...product.data()}
+            />
           </Grid>
         ))}
       </Grid>

@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { useFirebase } from "../context/Firebase";
 import { useNavigate } from "react-router-dom";
@@ -11,61 +11,70 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  useEffect(() => {
-    if (firebase.isLoggedIn) {
-      navigate("/");
-    }
-  }, [firebase, navigate]);
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     await firebase.signinUserWithEmailAndPass(email, password);
     console.log("You are logged in");
+    navigate("/");
   };
 
   return (
-    <div className="container mt-5">
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="exampleInputEmail1" className="form-label">
-            Email address
-          </label>
-          <input
-            type="email"
-            className="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="exampleInputPassword1" className="form-label">
-            Password
-          </label>
-          <input
-            type="password"
-            className="form-control"
-            id="exampleInputPassword1"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-          />
-        </div>
-        <div className="mb-3 form-check">
-          <input
-            type="checkbox"
-            className="form-check-input"
-            id="exampleCheck1"
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Login
-        </button>
-      </form>
-      <h1 className="mt-5 mb-5">OR</h1>
-      <button onClick={firebase.signinWithGoogle} className="btn btn-danger">
-        Sign in with Google
-      </button>
+    <div className="split-screen">
+      <div className="left">
+        <section className="copy">
+          <h1>Your One-Stop Soil Shop</h1>
+        </section>
+      </div>
+      <div className="right">
+        <form onSubmit={handleSubmit}>
+          <section className="copy">
+            <h2>Login</h2>
+          </section>
+          <div className="input-container email">
+            <label htmlFor="email">Email</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              onChange={handleEmailChange}
+              value={email}
+            />
+          </div>
+          <div className="input-container password">
+            <label htmlFor="password">Password</label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              onChange={handlePasswordChange}
+              value={password}
+            />
+          </div>
+          <button type="submit" className="signup-btn">
+            Login
+          </button>
+          <div
+            style={{ marginTop: "20px" }}
+            className="d-flex justify-content-center"
+          >
+            <button
+              onClick={firebase.signinWithGoogle}
+              className="btn btn-danger"
+            >
+              Sign in with Google
+            </button>
+          </div>
+        </form>
+        {/* <h3 className="mt-5 mb-5">OR</h3> */}
+      </div>
     </div>
   );
 };
