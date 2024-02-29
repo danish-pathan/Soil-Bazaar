@@ -14,19 +14,29 @@ Welcome to Soil Store, your premier soil marketplace! This dynamic web applicati
 2. **Connecting Users and Distributors:**
    Acting as a marketplace, Soil Store bridges the gap between users and soil distributors. Distributors can showcase their products, reaching a broader audience, while users gain access to a wide selection of soil options from trusted sources.
 
-3. **Educational Resources:**
-   Beyond product listings, Soil Store aims to become a valuable resource by providing educational content on soil types, composition, and best practices for soil management. This empowers users with knowledge to make informed decisions about their soil-related needs.
+3. **Easy Product Listing for Distributors:**
+   Provide distributors with a straightforward way to list their soil products on Soil Store. This feature allows distributors to showcase their offerings, making it convenient for them to reach potential customers.
 
-## Functionalities
 
-- **Product Listings:**
-  Browse and explore a wide range of soil-related products available from various distributors.
+## Tech Stack
 
-- **User Authentication with Firebase:**
-  Securely login or sign up using Firebase authentication for a personalized experience.
+### Frontend
+- **ReactJS:** A JavaScript library for building user interfaces, ensuring a responsive and dynamic frontend.
+- **React Router:** Used for efficient client-side navigation and providing a smooth user experience.
+- **Material UI:** A React UI framework that brings a consistent design system and responsive components to the application.
 
-- **Efficient Navigation with React Router:**
-  Enjoy smooth and intuitive navigation through different sections of the Soil Store.
+### Backend
+- **Firebase:** Leveraged for user authentication, ensuring secure login and signup functionality.
 
-- **Context API for State Management:**
-  Ensure efficient state management and a seamless user experience with React Context API.
+### Database
+- **Firebase Firestore:** A NoSQL cloud database, providing a flexible and scalable solution for storing and retrieving data.
+
+### Deployment
+- **Firebase Hosting:** Used to deploy and host the Soil Store web application, providing a reliable and scalable hosting solution.
+
+### State Management
+- **React Context API:** Ensures efficient state management, facilitating seamless data flow within the application.
+
+### Other Technologies
+- **Git:** Version control system to track changes and collaborate on the development of the project.
+- **npm:** Node package manager for installing and managing project dependencies.
